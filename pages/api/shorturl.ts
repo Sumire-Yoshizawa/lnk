@@ -40,8 +40,10 @@ const isAbsoluteUrl = (url: string) => {
 const extractPostInput = async (req: NextApiRequest) => {
   try {
     await shortUrlInputSchema.validate(req.body);
-  } catch (err: string) {
-    throw createError(422, err.message);
+  } catch (error){
+if (error instanceof Error) {
+throw createError(422, error.message);
+}
 
   }
   let { url } = req.body;
