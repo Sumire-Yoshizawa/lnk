@@ -9,7 +9,7 @@ const handleErrors = (fn: NextApiHandler) => async (
     return await fn(req, res);
   } catch (error) {
     const statusCode = error.statusCode || 500;
-    const message = err.message || 'Oops, something went wrong!';
+    const message = error.message || 'Oops, something went wrong!';
 if (error instanceof Error) {
     res.status(statusCode).json({ statusCode, message });
 }
