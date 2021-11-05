@@ -38,8 +38,9 @@ const isAbsoluteUrl = (url: string) => {
 const extractPostInput = async (req: NextApiRequest) => {
   try {
     await shortUrlInputSchema.validate(req.body);
-  } catch (err) {
+  } catch (err: string) {
     throw createError(422, err.message);
+
   }
   let { url } = req.body;
   url = url.trim();
@@ -47,7 +48,7 @@ const extractPostInput = async (req: NextApiRequest) => {
   // Otherwise, it redirects to "http://localhost:3000/<url>"
   // instead of "http(s)://<url>".
   if (!isAbsoluteUrl(url)) {
-    url = `http://${url}`;
+    url = `https://${url}`;
   }
   let { customAlias } = req.body;
   customAlias = customAlias.trim();
