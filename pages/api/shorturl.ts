@@ -15,7 +15,7 @@ const getInputValidationSchema = Yup.object().shape({
 const extractGetInput = async (req: NextApiRequest) => {
   try {
     await getInputValidationSchema.validate(req.query);
-  } catch (err) {
+  } catch (err: string) {
     throw createError(422, err.message);
   }
   const { alias } = req.query;
